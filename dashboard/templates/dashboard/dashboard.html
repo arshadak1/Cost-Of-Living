@@ -1,0 +1,120 @@
+{% extends 'dashboard/base.html' %}
+{% load static %} 
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}" />
+
+
+
+
+{% endblock css %} 
+
+{% block title %} Dashboard {% endblock title %} 
+
+{% block content %}
+  <div class="content">
+    <div class="content-header">
+      <h1>Welcome, </h1>
+      <h2>{{ request.user.get_full_name }}</h2>
+    </div>
+
+    <div class="edit-btn">
+      <a href="{% url 'data' %}">Edit Data</a>
+    </div>
+    <!-- DATA START HERE -->
+    <div class="datas">
+      <div id="data_list" data-list="{{ doughnut_js_data }}" style="display: none;"></div>
+      <div id="data_bar_list" data-list="{{ monthly_js_data }}" style="display: none;"></div>
+
+      <div class="data-card">
+        <div class="card income">
+          <div class="left">
+          <h1>Net Income</h1>
+          <h2>$ {{ total_net_income }}</h2>
+        </div>
+        <div class="right">
+          <img src="{% static 'dashboard/img/profit.png' %}" alt="">
+        </div>
+        </div>
+
+        <div class="card expense">
+          <div class="left">
+          <h1>Net Expense</h1>
+          <h2>$ {{ total_net_expense }}</h2>
+        </div>
+        <div class="right">
+          <img src="{% static 'dashboard/img/loss.png' %}" alt="">
+        </div>
+        </div> 
+      </div>
+        
+  </div>
+    <!-- GRAPHS START HERE -->
+  
+    <div class="graph-section">
+      <div class="graphs doughnut card">
+        <canvas id="doughnutChart" width="1" height="1"></canvas>
+      </div>
+      <div class="graphs line card">
+        <canvas id="savingsMonthChart" width="1" height="1"></canvas>
+      </div>
+    </div>
+  
+
+    <!-- FOOTER START HERE -->
+    <div class="footer hidden">
+      <div class="social-buttons">
+        <a
+          href="#"
+          class="social-buttons__button social-button social-button--facebook"
+          aria-label="Facebook"
+        >
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a
+          href="#"
+          class="social-buttons__button social-button social-button--linkedin"
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a
+          href="#"
+          class="social-buttons__button social-button social-button--snapchat"
+          aria-label="SnapChat"
+        >
+          <i class="fab fa-snapchat-ghost"></i>
+        </a>
+        <a
+          href="#"
+          class="social-buttons__button social-button social-button--github"
+          aria-label="GitHub"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+        <a
+          href="#"
+          class="social-buttons__button social-button social-button--codepen"
+          aria-label="CodePen"
+        >
+          <i class="fab fa-codepen"></i>
+        </a>
+      </div>
+      <div class="copyright" style="font-size: smaller">
+        <small>Copyrights &copy; 2022. All rights reserved.</small>
+      </div>
+    </div>
+    </div>
+  
+
+
+
+
+{% endblock content %}
+
+
+{% block script %}
+<script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+
+{% endblock script %}
+  

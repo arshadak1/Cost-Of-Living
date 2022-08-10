@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'authentication/img/tab_icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'authentication/style.css' %}" />
+    <title>SignUp</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sign-up">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="post">
+          {% csrf_token %}
+
+          <label for="name">UserName: </label>
+          {% if userExists %}
+          <input
+            type="text"
+            name="username"
+            id="name"
+            class="input-box error-inp"
+            value="{{ username }}"
+            required
+          />
+          <small class="error">Username already exists!</small>
+          {% else %}
+
+          <input
+            type="text"
+            name="username"
+            id="name"
+            class="input-box"
+            value="{{ username }}"
+            required
+          />
+
+          {% endif %}
+
+          <label for="email">Email: </label>
+
+          {% if emailExists %}
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="input-box error-inp"
+            value="{{ emailStr }}"
+            required
+          />
+          <small class="error">Email already exists!</small>
+          {% else %}
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="input-box"
+            value="{{ emailStr }}"
+            required
+          />
+          {% endif %}
+          <label for="password">Password: </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="input-box"
+            required
+          />
+          <label for="confirm-password">Confirm Password: </label>
+          {% if password %}
+          <input
+            type="password"
+            name="confirm-password"
+            id="confirm-password"
+            class="input-box error-inp"
+            required
+          />
+          <small class="error">Password doesn't match!</small>
+          {% else %}
+          <input
+            type="password"
+            name="confirm-password"
+            id="confirm-password"
+            class="input-box"
+            required
+          />
+          {% endif %}
+          <button type="submit" class="input-btn" id="input-btn">
+            Sign Up
+          </button>
+        </form>
+        <p class="already-accnt">
+          Already have an Account? <a href="./login">Login</a>
+        </p>
+      </div>
+      <div class="pictures">
+        <img
+          src="{% static 'authentication/img/illu-login.png' %}"
+          alt=""
+          draggable="false"
+        />
+      </div>
+    </div>
+    <script
+      type="text/javascript"
+      src="{% static 'authentication/main.js' %}"
+    ></script>
+  </body>
+</html>

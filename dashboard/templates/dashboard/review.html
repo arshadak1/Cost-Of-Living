@@ -1,0 +1,89 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/review.css' %}" />
+
+{% endblock css %}
+
+
+{% block title %}
+    Reviews - COL
+{% endblock title %}
+
+
+{% block content %}
+    <div class="content">
+        
+       
+       
+        
+            
+        <div class="rating-container">
+            <div class="left">
+        <h1>WE APPRECIATE YOUR REVIEW!</h1>
+        <!-- <p>Your review will help us to improve our website, and make your life more easy. </p> -->
+    </div>
+        <div class="right sub">
+            {% if submitted_once %}
+       <div class="modal" id="modal">
+        <div class="smileyface">
+            <span>&#128578;</span>
+        </div>
+        <div class="modal-message">
+            <h2>Thank you for your review. </h2>
+        </div>
+    </div>
+    </div>
+       {% else %}
+       <div class="right">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="rating">
+                <p>How was your experience?</p>
+                <div class="btns">
+                <div name="rating-4" class="rating-btn" value="4" id="4">&#9734;</div>
+                <div name="rating-5" class="rating-btn" value="5" id="5">&#9734;</div>
+                <div name="rating-3" class="rating-btn" value="3" id="3">&#9734;</div>
+                <div name="rating-2" class="rating-btn" value="2" id="2">&#9734;</div>
+                <div name="rating-1" class="rating-btn" value="1" id="1">&#9734;</div>
+                <input type="hidden" style="display: none;" name="rating-value" id="rating-value" value="0">
+            </div>
+              </div>
+            <input type="submit" value="Submit">
+        </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+    </div>
+{% endblock content %}
+    
+
+{% block script %}
+    <script>
+        const rating_btns = document.querySelectorAll('.rating-btn')
+
+        rating_btns.forEach((item, i) => {
+            item.onclick = () => {
+                var currStarLevel = i + 1
+                var a = document.getElementById('rating-value').setAttribute('value', `${currStarLevel}`) 
+                rating_btns.forEach((item, j) => {
+                    if(currStarLevel >= j+1){
+                        item.innerHTML = '&#9733;'
+                    }
+                    else{
+                        item.innerHTML = '&#9734;'
+                    }
+                })
+            }
+             
+        })
+    </script>
+
+        
+{% endblock script %}
+    <!-- 
+        
+     -->

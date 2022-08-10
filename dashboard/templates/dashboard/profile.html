@@ -1,0 +1,112 @@
+{% extends 'dashboard/base.html' %}
+ {% load static %} 
+ {% block css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/profile.css' %}" />
+{% endblock css %} 
+{% block title %} Profile - COL {% endblock title %} 
+{% block content %}
+<div class="content">
+  <div class="{{ form_msg_class }}">
+    <p>{{ form_message }}</p>
+    <p id="form-msg-close">&times;</p>
+  </div>
+  <div class="heading">
+    
+    <h1>Update your profile</h1>
+
+    
+  </div>
+  <form action="/dashboard/profile" method="post" id="form" onsubmit="checkForm(event)">
+    {% csrf_token %}
+    <div class="form">
+        <div class="inputs-block">
+      <div class="block">
+        <div id="datasForForm" style="display: none;" data-inputs="{{ data_inputs }}"></div>
+        <label for="username">Username</label>
+        
+        {% if usernameError %}
+          <input type="text" name="username" id="username" value="{{ username }}" class="profile-inp error-inp" />
+          <small class="err-msg">Username already exist!</small>
+        {% else %}
+          <input type="text" name="username" id="username" value="{{ username }}" class="profile-inp" />
+          <small class="err-msg pass_hidden">Username already exist!</small>
+        {% endif %}
+          
+        <label for="firstname">First Name</label>
+        <input
+          type="text"
+          name="firstname"
+          id="firstname"
+          value="{{ firstname }}"
+          class="profile-inp"
+        />
+        <small class="err-msg pass_hidden">First Name Error!</small>
+
+
+        <label for="password" class="pass_label">Password <span id="pass_img"><img src="{% static 'dashboard/img/question.png' %}" alt=""></span>
+        <div class="pass_msg pass_msg_hidden">
+          <b> Password requirements:</b>
+          <ul>
+            
+            <li>8 or more characters</li>
+            <li>Atleast one capital letter</li>
+            <li>One number[0-9]</li>
+            <li>One special character (@,^&:% etc.)</li>
+
+          </ul>
+        </div>
+        </label>
+        
+        {% if passValidErr %}
+        <input type="password" name="password" id="password" class="profile-inp error-inp">
+        <small class="err-msg" id="pass_err_msg">Please enter a valid password!</small>
+        {% else %}
+        <input type="password" name="password" id="password" class="profile-inp">
+        <small class="err-msg pass_hidden" id="pass_err_msg">Password does not match!</small>
+        {% endif %}
+          
+
+      </div>
+      <div class="block">
+        <label for="email">Email</label>
+        
+        {% if emailError %}
+          <input type="email" name="email" id="email" value="{{ email }}" class="profile-inp error-inp" />
+          <small class="err-msg">{{ emailMsg }}</small>
+        {% else %}
+          <input type="email" name="email" id="email" value="{{ email }}" class="profile-inp" />
+          <small class="err-msg pass_hidden">Email error!</small>
+        {% endif %}
+        
+        
+        <label for="lastname">Last Name</label>
+        <input type="text" name="lastname" id="lastname" value="{{ lastname }}" class="profile-inp" />
+        <small class="err-msg pass_hidden">Lastname error!</small>
+        
+
+
+        <label for="confirm-password">Confirm Password</label>
+        
+        {% if passSameErr %}
+        <input type="password" name="confirm-password" id="confirm-password" class="profile-inp error-inp">
+        <small class="err-msg" id="password_match">Password does not match!</small>
+        {% else %}
+        <input type="password" name="confirm-password" id="confirm-password" class="profile-inp">
+        <small class="err-msg pass_hidden" id="password_match">Password does not match!</small>
+        {% endif %}
+          
+      </div>
+    </div>
+      <div class="block">
+        <button type="submit">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %} 
+
+{% block script %}
+<script src="{% static 'dashboard/js/profile.js' %}"></script>
+
+
+{% endblock script %}

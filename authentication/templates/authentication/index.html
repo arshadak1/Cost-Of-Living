@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'authentication/img/tab_icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'authentication/index.css' %}" />
+    <title>C.O.L</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="i2">
+        <div class="logo">
+          <h2>C.O.L</h2>
+        </div>
+        <div class="nav">
+          <!-- check whether the user is logged in -->
+          {% if user.is_authenticated %}
+          <a href="/signout"><button class="input-btn">Logout</button></a>
+          {% else %}
+          <a href="/login" class="login-link">Login</a>
+          <a href="/signup"><button class="input-btn">Sign Up</button></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="body">
+      <div class="text">
+        <img
+          class="graph"
+          src="{% static 'authentication/img/dollar.svg' %}"
+          alt="" 
+          draggable="false"
+        />
+        <h1 class="welcome"><span>Welcome</span> to C.O.L.</h1>
+        <h3 class="description">
+          Track your <span>Cost Of Living</span> and enjoy the art of keeping
+          money.
+        </h3>
+        {% if user.is_authenticated %}
+        <a href="/dashboard"><button class="body-btn">Dashboard</button></a>
+        {% else %}
+        <a href="/signup"><button class="body-btn">START SAVING</button></a>
+        {% endif %}
+      </div>
+      <div class="finance-img">
+        <img
+          src="{% static 'authentication/img/finance.svg' %}"
+          alt="col.png" 
+          draggable="false"
+        />
+      </div>
+    </div>
+
+    <script src="{% static 'authentication/main.js' %}"></script>
+  </body>
+</html>

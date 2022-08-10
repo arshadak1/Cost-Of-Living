@@ -1,0 +1,37 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/graphs.css' %}" />
+    
+{% endblock css %}
+
+
+{% block title %}
+    Graphs - COL
+{% endblock title %}
+
+
+{% block content %}
+    <div class="content">
+        <div class="graph-section">
+          <div id="data_list" data-list="{{ doughnut_js_data }}" style="display: none;"></div>
+          <div id="data_bar_list" data-list="{{ monthly_js_data }}" style="display: none;"></div>
+    
+
+            <div class="graphs doughnut card">
+              <canvas id="doughnutChart" width="2" height="2"></canvas>
+            </div>
+            <div class="graphs line card">
+              <canvas id="savingsMonthChart" width="1" height="1"></canvas>
+            </div>
+          </div>
+    </div>
+{% endblock content %}
+    
+
+{% block script %}
+<script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+    
+{% endblock script %}
+    

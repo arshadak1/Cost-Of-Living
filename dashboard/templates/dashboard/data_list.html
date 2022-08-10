@@ -1,0 +1,123 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/data.css' %}" />
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+    
+{% endblock css %}
+
+
+{% block title %}
+    Data - COL
+{% endblock title %}
+
+
+{% block content %}
+    <div class="content">
+        <div class="container-data list-container">
+<div class="header-bar">
+    <div>
+        <h1>Incomes </h1>
+            <h1>& Expenses</h1>
+        
+    </div>
+
+    
+</div>
+
+
+<div id="search-add-wrapper">
+    <form method="GET" style="display: flex;">
+        <input type='text' name='search-area' placeholder="Search your data" value="{{ search_input }}">
+        <input class="button" type="submit" value='Search'>
+    </form>
+    <a id="add-link" href="{% url 'data-create' %}">&#x2b;</a>
+</div>
+
+
+<!-- Hidden form. Form submits new item positions -->
+
+
+
+<div id="datalist" class="data-items-wrapper">
+    <div class="data-wrapper table-header">
+        <div class="data-title">
+            <p>Source</p>
+            <div>
+                <p>Type</p>
+            </div>
+        </div>
+        
+        <div class="data-value">
+            <p>Amount</p>
+        </div>
+        <div class="data-date">
+            <p>Date</p>
+        </div>
+        <div class="data-controls">
+            <p>Delete</p>
+        </div>
+    </div>
+    {% for data in datas %}
+    <div class="data-wrapper" data-position="{{ data.pk }}">
+        
+        
+            
+        <div class="data-title">
+            
+
+            <i><a href="{% url 'data-update' data.id %}">{{ data }}</a></i> 
+            {% if data.is_expense %}
+            <!-- &#8964; &#8963; -->
+            <div class="data-expense-icon data-expense-common" title="Expense">
+                <span></span>
+            </div> 
+            <!-- <img src="{% static 'dashboard/img/down.png' %}" alt="Expense" title="Expense" > -->
+            {% else %}
+            <div class="data-income-icon data-expense-common" title="Income">
+                <span></span>
+            </div>           
+            {% endif %}
+            </div>
+            
+            <div class="data-value">
+            <i><a href="{% url 'data-update' data.id %}" class="value">$ {{ data.value }}<span id="per-span">
+                /{{ data.per }}</span></a></i> 
+            
+        </div>
+        <div class="data-date">
+            <p>{{ data.Date }}</p>
+        </div>
+        <div class="data-controls">
+            <!-- <span class="handle">&nbsp;&#10247;</span> &#215; -->
+            <a class="delete-link" href="{% url 'data-delete' data.id %}">
+                <div class="delete-span" title="Expense">
+                    <span>|</span>
+                </div> 
+            </a>
+            
+        </div>
+        
+        
+    </div>
+
+    {% empty %}
+    <div class="empty-list">
+        <h4 style="font-weight: 300;">No new datas are created.</h4>
+        <h4 style="font-weight: 300;">Create a <a href="{% url 'data-create' %}">New data</a> ! </h4>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+    </div>
+{% endblock content %}
+    
+
+{% block script %}
+<!-- <script src="{% static 'dashboard/js/dashboard.js' %}"></script> -->
+
+{% endblock script %}
+    

@@ -1,0 +1,25 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+<!-- <link rel="stylesheet" href="{% static 'dashboard/css/data.css' %}" /> -->
+    
+{% endblock css %}
+
+
+{% block title %}
+    Data
+{% endblock title %}
+
+
+{% block content %}
+    <div class="content">
+        <h3>DATA: {{ data }}</h3>
+    </div>
+{% endblock content %}
+    
+
+{% block script %}
+<!-- <script src="{% static 'dashboard/js/dashboard.js' %}"></script> -->
+    
+{% endblock script %}

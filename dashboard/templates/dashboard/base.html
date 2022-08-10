@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'dashboard/img/tab_icon.ico' %}"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/base.css' %}" />
+
+    {% block css %} 
+    {% endblock css %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/542767a62c.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>{% block title %} Dashboard {% endblock title %}</title>
+  </head>
+
+  <body>
+    {% if user.is_authenticated %}
+    <div class="container hidden">
+      <div class="menu hidden">
+        <div class="logo">
+          <h2 class="col-logo">C.O.L</h2>
+          <div class="menu-5">
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+        <div class="menu-list">
+          <ul class="menu-items">
+            <a href="{% url 'dashboard' %}" id="dashboard-menu">
+              <img
+                src="{% static 'dashboard/img/dashboard_icon.svg' %}"
+                alt=""
+              />
+
+              <li class="menu-item">Dashboard</li>
+            </a>
+
+            <a href="{% url 'graphs' %}" id="graphs-menu">
+              <img src="{% static 'dashboard/img/graph_icon.svg' %}" alt="" />
+
+              <li class="menu-item">Graphs</li>
+            </a>
+            <a href="{% url 'data' %}" id="data-menu">
+              <img src="{% static 'dashboard/img/expense_icon.svg' %}" alt="" />
+
+              <li class="menu-item">Datas</li>
+            </a>
+            <a href="{% url 'profile' %}" id="profile-menu">
+              <img src="{% static 'dashboard/img/profile_icon.svg' %}" alt="" />
+
+              <li class="menu-item">Profile</li>
+            </a>
+            <a href="{% url 'review' %}" id="reviews-menu">
+              <img src="{% static 'dashboard/img/reviews_icon.svg' %}" alt="" />
+
+              <li class="menu-item">Reviews</li>
+            </a>
+            <a href="/signout" id="logout">
+              <img src="{% static 'dashboard/img/logout_icon.svg' %}" alt="" />
+
+              <li class="menu-item logout">Logout</li>
+            </a>
+          </ul>
+        </div>
+      </div>
+      <div class="contents">
+        <div class="content-bar">
+          <a href="">
+            <h2>C.O.L</h2>
+          </a>
+          <div class="profile"></div>
+        </div>
+
+        {% block content %} 
+        {% endblock content %}
+      </div>
+    </div>
+
+    {% else %}
+    <p>Sorry please login</p>
+    {% endif %}
+
+    <script src="{% static 'dashboard/js/base.js' %}"></script>
+
+    {% block script %} {% endblock script %}
+  </body>
+</html>

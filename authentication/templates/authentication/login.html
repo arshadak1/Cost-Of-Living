@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'authentication/img/tab_icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'authentication/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'authentication/login.css' %}" />
+
+    <title>Login</title>
+  </head>
+
+  <body>
+    <div class="container">
+      {% if created %}
+      <div class="modal active" id="modal">
+        <div class="modal-header">
+          <!-- <button data-close-button class="close-button">&times;</button> -->
+          <div class="title">Account Created Successfully!!!</div>
+          <div class="modal-body">
+            Confirmation mail has been sent. Please verify your account!
+          </div>
+          <div class="check-circle">
+            <img
+              src="{% static 'authentication/img/checkmark.svg' %}"
+              alt=""
+              draggable="false"
+            />
+          </div>
+        </div>
+      </div>
+      <div id="overlay" class="active"></div>
+      {% endif %}
+
+      <div class="sign-up">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+          {% csrf_token %}
+          <label for="email">Username or Email: </label>
+          <!-- emailError -->
+          {% if userError %}
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="input-box error-inp"
+            value="{{ user_or_email }}"
+            required
+          />
+          <small class="error">No account found!</small>
+          {% else %}
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="input-box"
+            value="{{ user_or_email }}"
+            required
+          />
+          {% endif %}
+          <label for="password">Password: </label>
+          {% if passwordError and not userError %}
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="input-box error-inp"
+            required
+          />
+          <small class="error">Incorrect password!</small>
+          {% else %}
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="input-box"
+            required
+          />
+          {% endif %}
+          <button type="submit" class="input-btn">Login</button>
+        </form>
+        <p>Don't have an account? <a href="/signup">Sign-Up</a></p>
+      </div>
+      <div class="pictures">
+        <img
+          src="{% static 'authentication/img/illu-login.png' %}"
+          alt=""
+          draggable="false"
+        />
+      </div>
+    </div>
+    <script src="{% static 'authentication/main.js' %}"></script>
+  </body>
+</html>
