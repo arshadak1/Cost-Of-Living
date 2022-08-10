@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
-  <a href="responsive---mobile-view">Mobile View</a> •
+  <a href="#responsive---mobile-view">Mobile View</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#dependencies">Dependencies</a> •
   <a href="#related">Related</a> •
