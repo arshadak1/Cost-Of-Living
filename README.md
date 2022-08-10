@@ -13,9 +13,9 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
+  <a href="responsive---mobile-view">Mobile View</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
+  <a href="#dependencies">Dependencies</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
@@ -28,7 +28,7 @@
 * Can update profile easily.
 * Visualize monthly as well as annual expenses.
 
-## Responsive
+## Responsive - Mobile View
 <p>
 <img src="https://user-images.githubusercontent.com/75536974/183647736-4f66e748-ba6e-4b0b-866f-cc2d1f978b05.png" alt="signup-page" width="240">
 <img src="https://user-images.githubusercontent.com/75536974/183647754-83251069-f7c7-48ab-8cb9-92badcefa327.png" alt="login-page" width="240">
